@@ -93,3 +93,27 @@ body {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+.is-hidden {
+  display: none !important;
+}
+.load-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4e75ff;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 250ms ease,
+    transform 150ms ease;
+}
+.load-more:hover {
+  background-color: #6c8cff;
+}
+.load-more:active {
+  transform: scale(0.97);
+}
