@@ -32,8 +32,12 @@ form.addEventListener("submit", async (e) => {
         } else {
             createGallery(data.hits);
         
-            if (page * 15 < totalHits) {
+            if (page * PER_PAGE < totalHits) {
                 showLoadMoreButton();
+            } else {
+                iziToast.info({
+                    message: "We're sorry, but you've reached the end of search results.",
+                });
             }
         }
     } catch (error) {
@@ -47,6 +51,8 @@ form.addEventListener("submit", async (e) => {
 
 loadMoreBtn.addEventListener("click", async () => {
     page++;
+    loadMoreBtn.textContent = "Please wait...";
+    hideLoadMoreButton();
     showLoader();
 
     try {
@@ -61,12 +67,13 @@ loadMoreBtn.addEventListener("click", async () => {
                 behavior: "smooth",
             });
         }
-        if (PER_PAGE * page >= totalHits || data.hits.length< PER_PAGE) {
+        if (page*PER_PAGE >= totalHits || data.hits.length < PER_PAGE) {
             hideLoadMoreButton();
             iziToast.info({
                 message: "We're sorry, but you've reached the end of search results.",
             });
         } else {
+            loadMoreBtn.textContent = "Load more";
             showLoadMoreButton();
         }
     } catch (error) {
